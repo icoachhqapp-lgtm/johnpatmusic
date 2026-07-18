@@ -12,7 +12,6 @@ export interface Song {
   lyricExcerpt: string;
   audioPath: string;
   artworkPath: string;
-  duration: string;
   availableForRecording: boolean;
   featured: boolean;
   vocalFormat: VocalFormat;
@@ -36,7 +35,6 @@ export const songs: Song[] = [
       "You give what it takes when the road gets long…\nyou give what it takes when your back ain’t strong…",
     audioPath: "/audio/what-it-takes.mp3",
     artworkPath: "/images/songs/what-it-takes.png",
-    duration: "3:42",
     availableForRecording: true,
     featured: true,
     vocalFormat: "Male vocal",
@@ -56,7 +54,6 @@ export const songs: Song[] = [
       "She only looks at me that way…\nlike the whole world fell away…",
     audioPath: "/audio/she-only-looks-at-me-that-way.mp3",
     artworkPath: "/images/songs/she-only-looks-at-me-that-way.png",
-    duration: "3:28",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male/Female duet",
@@ -76,7 +73,6 @@ export const songs: Song[] = [
       "Can I come along… just a little while longer…\nbefore the road gets wider and you’re stronger…",
     audioPath: "/audio/can-i-come-along.mp3",
     artworkPath: "/images/songs/can-i-come-along.png",
-    duration: "3:55",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
@@ -96,7 +92,6 @@ export const songs: Song[] = [
       "Back when time moved slow…\nand nobody was in a hurry to go…",
     audioPath: "/audio/back-when-time-moved-slow.mp3",
     artworkPath: "/images/songs/back-when-time-moved-slow.png",
-    duration: "4:02",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male/Female duet",
@@ -116,7 +111,6 @@ export const songs: Song[] = [
       "I still got some fight left in me…\nain’t down yet and I don’t aim to be…",
     audioPath: "/audio/still-got-some-fight.mp3",
     artworkPath: "/images/songs/still-got-some-fight.png",
-    duration: "3:36",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
@@ -136,7 +130,6 @@ export const songs: Song[] = [
       "Believe when the night won’t break…\nbelieve in the promise you can’t yet take…",
     audioPath: "/audio/believe.mp3",
     artworkPath: "/images/songs/believe.png",
-    duration: "3:48",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
@@ -156,7 +149,6 @@ export const songs: Song[] = [
       "Home ain’t a house… it ain’t brick and wood…\nit’s the ones who love you like nobody could…",
     audioPath: "/audio/home-aint-a-house.mp3",
     artworkPath: "/images/songs/home-aint-a-house.png",
-    duration: "3:40",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male/Female duet",
@@ -176,7 +168,6 @@ export const songs: Song[] = [
       "These nights ain’t long enough…\nwhen the band’s still playing and the road’s still rough…",
     audioPath: "/audio/not-long-enough.mp3",
     artworkPath: "/images/songs/not-long-enough.png",
-    duration: "3:22",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
@@ -196,7 +187,6 @@ export const songs: Song[] = [
       "Leave it better than you found it…\nleave a little light where the dark surrounded it…",
     audioPath: "/audio/leave-it-better-than-you-found-it.mp3",
     artworkPath: "/images/songs/leave-it-better-than-you-found-it.png",
-    duration: "4:05",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
@@ -216,7 +206,6 @@ export const songs: Song[] = [
       "It’s a honky tonk revival…\nbring your broken heart and your survival…",
     audioPath: "/audio/honky-tonk-revival.mp3",
     artworkPath: "/images/songs/honky-tonk-revival.png",
-    duration: "3:30",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",

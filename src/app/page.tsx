@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { DemoPlayButton } from "@/components/DemoPlayButton";
+import { SongArtwork } from "@/components/SongArtwork";
 import { SongCard } from "@/components/SongCard";
 import { getCatalogPreview, getFeaturedSong } from "@/data/songs";
 
@@ -108,15 +109,13 @@ export default function HomePage() {
           <h2 className="section-title">What It Takes</h2>
 
           <div className="featured-song mt-10">
-            <div className="featured-song__art">
-              <Image
-                src={featured.artworkPath}
-                alt={`Artwork for ${featured.title}`}
-                width={900}
-                height={900}
-                className="h-auto w-full object-cover"
-              />
-            </div>
+            <SongArtwork
+              src={featured.artworkPath}
+              alt={`Artwork for ${featured.title}`}
+              size="featured"
+              priority
+              className="featured-song__art"
+            />
 
             <div>
               <div className="song-card__tags">

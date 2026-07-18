@@ -11,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { getAdjacentSongs, type Song } from "@/data/songs";
+import { formatAudioTime, safeAudioDuration } from "@/lib/formatAudioTime";
 
 export type AudioStatus =
   | "idle"
@@ -41,10 +42,6 @@ interface AudioContextValue {
 
 const AudioPlayerContext = createContext<AudioContextValue | null>(null);
 
-function formatSafeDuration(value: number) {
-  return Number.isFinite(value) && value > 0 ? value : 0;
-}
-
 export function AudioProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentSongRef = useRef<Song | null>(null);
@@ -73,7 +70,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    if (isSame && (status === "paused" || audio.paused) && status !== "unavailable") {
+    if (
+      isSame &&
+      (status === "paused" || audio.paused) &&
+      status !== "unavailable"
+    ) {
       void audio.play().catch(() => setStatus("unavailable"));
       return;
     }
@@ -101,9 +102,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     audio.preload = "metadata";
     audioRef.current = audio;
 
+    const syncDuration = () => {
+      setDuration(safeAudioDuration(audio.duration));
+    };
+
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const onLoadedMetadata = () =>
-      setDuration(formatSafeDuration(audio.duration));
+    const onLoadedMetadata = () => syncDuration();
+    const onDurationChange = () => syncDuration();
     const onEnded = () => {
       const song = currentSongRef.current;
       if (!song) {
@@ -127,6 +132,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("loadedmetadata", onLoadedMetadata);
+    audio.addEventListener("durationchange", onDurationChange);
     audio.addEventListener("ended", onEnded);
     audio.addEventListener("playing", onPlaying);
     audio.addEventListener("pause", onPause);
@@ -139,6 +145,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       audio.load();
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+      audio.removeEventListener("durationchange", onDurationChange);
       audio.removeEventListener("ended", onEnded);
       audio.removeEventListener("playing", onPlaying);
       audio.removeEventListener("pause", onPause);
@@ -199,10 +206,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     (time: number) => {
       const audio = audioRef.current;
       if (!audio || status === "unavailable") return;
-      const next = Math.max(
-        0,
-        Math.min(time, formatSafeDuration(audio.duration) || time),
-      );
+      const max = safeAudioDuration(audio.duration);
+      const next = Math.max(0, Math.min(time, max || time));
       audio.currentTime = next;
       setCurrentTime(next);
     },
@@ -286,8 +291,6 @@ export function useAudioPlayer() {
 }
 
 export function formatTime(seconds: number) {
-  if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
+  // Keep 0:00 for elapsed-time zero; formatAudioTime already handles that.
+  return formatAudioTime(seconds);
 }

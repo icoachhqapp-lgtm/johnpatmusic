@@ -1,6 +1,9 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { DemoPlayButton } from "@/components/DemoPlayButton";
+import { SongArtwork } from "@/components/SongArtwork";
+import { AudioDuration } from "@/components/AudioDuration";
 import type { Song } from "@/data/songs";
 
 interface SongCardProps {
@@ -18,21 +21,26 @@ export function SongCard({
     <article
       className={`catalog-entry catalog-entry--${layout} ${featured ? "catalog-entry--featured" : ""}`}
     >
-      <div className="catalog-entry__art">
-        <Image
-          src={song.artworkPath}
-          alt={`Cover artwork for ${song.title}`}
-          width={800}
-          height={800}
-          className="h-full w-full object-cover"
-        />
+      <SongArtwork
+        src={song.artworkPath}
+        alt={`Cover artwork for ${song.title}`}
+        size="card"
+        className="catalog-entry__art"
+      >
         <div className="catalog-entry__play-overlay">
           <DemoPlayButton song={song} variant="overlay" />
         </div>
-      </div>
+      </SongArtwork>
 
       <div className="catalog-entry__body">
-        <p className="catalog-entry__genre">{song.genres.join(" · ")}</p>
+        <div className="catalog-entry__meta-row">
+          <p className="catalog-entry__genre">{song.genres.join(" · ")}</p>
+          <AudioDuration
+            audioPath={song.audioPath}
+            songSlug={song.slug}
+            className="catalog-entry__duration"
+          />
+        </div>
 
         <h3 className="font-display catalog-entry__title">
           <Link href={`/songs/${song.slug}`}>{song.title}</Link>

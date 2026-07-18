@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { formatTime, useAudioPlayer } from "@/components/AudioProvider";
+import { SongArtwork } from "@/components/SongArtwork";
+import { formatAudioTime } from "@/lib/formatAudioTime";
+import { useAudioPlayer } from "@/components/AudioProvider";
 
 export function MiniPlayer() {
   const {
@@ -31,15 +32,12 @@ export function MiniPlayer() {
     <div className="mini-player" role="region" aria-label="Now playing">
       <div className="mini-player__inner">
         <div className="mini-player__track">
-          <div className="mini-player__art">
-            <Image
-              src={currentSong.artworkPath}
-              alt={`Artwork for ${currentSong.title}`}
-              width={72}
-              height={72}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          <SongArtwork
+            src={currentSong.artworkPath}
+            alt={`Artwork for ${currentSong.title}`}
+            size="player"
+            className="mini-player__art"
+          />
           <div className="mini-player__meta">
             <p className="mini-player__label">
               {unavailable ? "Demo coming soon" : "Now playing"}
@@ -88,7 +86,7 @@ export function MiniPlayer() {
 
           <div className="mini-player__timeline">
             <span className="mini-player__time">
-              {unavailable ? "—" : formatTime(currentTime)}
+              {unavailable ? "—" : formatAudioTime(currentTime)}
             </span>
             <input
               type="range"
@@ -103,10 +101,10 @@ export function MiniPlayer() {
             />
             <span className="mini-player__time">
               {unavailable
-                ? currentSong.duration
+                ? "Demo coming soon"
                 : duration > 0
-                  ? formatTime(duration)
-                  : currentSong.duration}
+                  ? formatAudioTime(duration)
+                  : "—:—"}
             </span>
           </div>
         </div>

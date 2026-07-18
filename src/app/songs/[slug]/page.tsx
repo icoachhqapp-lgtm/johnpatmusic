@@ -1,8 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FullAudioPlayer } from "@/components/FullAudioPlayer";
+import { SongArtwork } from "@/components/SongArtwork";
+import { SongInfoDuration } from "@/components/SongInfoDuration";
 import {
   AVAILABILITY_STATEMENT,
   getSongBySlug,
@@ -85,16 +86,13 @@ export default async function SongPage({ params }: SongPageProps) {
       <section className="section-shell pt-10">
         <div className="song-detail-grid reveal">
           <div>
-            <div className="overflow-hidden border border-[rgba(210,163,79,0.28)]">
-              <Image
-                src={song.artworkPath}
-                alt={`Artwork for ${song.title}`}
-                width={1000}
-                height={1000}
-                className="h-auto w-full object-cover"
-                priority
-              />
-            </div>
+            <SongArtwork
+              src={song.artworkPath}
+              alt={`Artwork for ${song.title}`}
+              size="detail"
+              priority
+              className="song-detail__art"
+            />
             <div className="mt-6">
               <FullAudioPlayer song={song} />
             </div>
@@ -131,7 +129,12 @@ export default async function SongPage({ params }: SongPageProps) {
               </div>
               <div>
                 <dt>Duration</dt>
-                <dd>{song.duration}</dd>
+                <dd>
+                  <SongInfoDuration
+                    audioPath={song.audioPath}
+                    songSlug={song.slug}
+                  />
+                </dd>
               </div>
             </dl>
 

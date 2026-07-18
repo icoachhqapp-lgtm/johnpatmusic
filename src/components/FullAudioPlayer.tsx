@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { formatTime, useAudioPlayer } from "@/components/AudioProvider";
+import { formatAudioTime } from "@/lib/formatAudioTime";
+import { useAudioPlayer } from "@/components/AudioProvider";
+import { AudioDuration } from "@/components/AudioDuration";
 import type { Song } from "@/data/songs";
 
 export function FullAudioPlayer({ song }: { song: Song }) {
@@ -85,14 +86,28 @@ export function FullAudioPlayer({ song }: { song: Song }) {
             <p className="full-player__notice">Demo coming soon</p>
           ) : (
             <p className="full-player__notice">
-              Concept recording · {song.duration}
+              Concept recording ·{" "}
+              {displayDuration > 0 ? (
+                formatAudioTime(displayDuration)
+              ) : (
+                <AudioDuration
+                  audioPath={song.audioPath}
+                  songSlug={song.slug}
+                />
+              )}
             </p>
           )}
         </div>
       </div>
 
       <div className="full-player__timeline">
-        <span>{unavailable ? "—" : formatTime(displayTime)}</span>
+        <span>
+          {unavailable
+            ? "—"
+            : current
+              ? formatAudioTime(displayTime)
+              : "0:00"}
+        </span>
         <input
           type="range"
           className="player-range"
@@ -105,11 +120,15 @@ export function FullAudioPlayer({ song }: { song: Song }) {
           onChange={(event) => seek(Number(event.target.value))}
         />
         <span>
-          {unavailable
-            ? song.duration
-            : displayDuration > 0
-              ? formatTime(displayDuration)
-              : song.duration}
+          {unavailable ? (
+            "Demo coming soon"
+          ) : displayDuration > 0 ? (
+            formatAudioTime(displayDuration)
+          ) : current ? (
+            "—:—"
+          ) : (
+            <AudioDuration audioPath={song.audioPath} songSlug={song.slug} />
+          )}
         </span>
       </div>
 
