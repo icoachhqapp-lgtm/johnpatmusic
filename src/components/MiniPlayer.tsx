@@ -1,0 +1,122 @@
+"use client";
+
+import Link from "next/link";
+import { formatTime, useAudioPlayer } from "@/components/AudioProvider";
+
+export function MiniPlayer() {
+  const {
+    currentSong,
+    status,
+    currentTime,
+    duration,
+    volume,
+    isMuted,
+    togglePlayPause,
+    seek,
+    setVolume,
+    toggleMute,
+    stop,
+  } = useAudioPlayer();
+
+  if (!currentSong) return null;
+
+  const progressMax = duration > 0 ? duration : 100;
+  const progressValue = duration > 0 ? currentTime : 0;
+  const unavailable = status === "unavailable";
+
+  return (
+    <div
+      className="mini-player"
+      role="region"
+      aria-label="Now playing"
+    >
+      <div className="mini-player__inner">
+        <div className="mini-player__meta">
+          <p className="mini-player__label">
+            {unavailable ? "Demo coming soon" : "Now playing"}
+          </p>
+          <p className="mini-player__title font-display">{currentSong.title}</p>
+        </div>
+
+        <div className="mini-player__controls">
+          <button
+            type="button"
+            className="player-icon-btn"
+            onClick={togglePlayPause}
+            aria-label={
+              unavailable
+                ? "Demo unavailable"
+                : status === "playing"
+                  ? "Pause"
+                  : "Play"
+            }
+            disabled={unavailable}
+          >
+            {status === "playing" ? "❚❚" : "▶"}
+          </button>
+
+          <div className="mini-player__timeline">
+            <span className="mini-player__time" aria-hidden={!unavailable}>
+              {unavailable ? "—" : formatTime(currentTime)}
+            </span>
+            <input
+              type="range"
+              className="player-range"
+              min={0}
+              max={progressMax}
+              step={0.1}
+              value={progressValue}
+              disabled={unavailable || duration <= 0}
+              aria-label="Seek"
+              onChange={(event) => seek(Number(event.target.value))}
+            />
+            <span className="mini-player__time">
+              {unavailable
+                ? currentSong.duration
+                : formatTime(duration || 0)}
+            </span>
+          </div>
+        </div>
+
+        <div className="mini-player__aside">
+          <div className="mini-player__volume">
+            <button
+              type="button"
+              className="player-icon-btn player-icon-btn--small"
+              onClick={toggleMute}
+              aria-label={isMuted || volume === 0 ? "Unmute" : "Mute"}
+            >
+              {isMuted || volume === 0 ? "Mute" : "Vol"}
+            </button>
+            <input
+              type="range"
+              className="player-range player-range--volume"
+              min={0}
+              max={1}
+              step={0.01}
+              value={isMuted ? 0 : volume}
+              aria-label="Volume"
+              onChange={(event) => setVolume(Number(event.target.value))}
+            />
+          </div>
+
+          <Link
+            href={`/songs/${currentSong.slug}`}
+            className="mini-player__link"
+          >
+            View Song
+          </Link>
+
+          <button
+            type="button"
+            className="player-icon-btn player-icon-btn--small"
+            onClick={stop}
+            aria-label="Stop"
+          >
+            Stop
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

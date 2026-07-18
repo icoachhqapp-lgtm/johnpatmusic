@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Caveat, Cormorant_Garamond, Rye } from "next/font/google";
+import { AudioProvider } from "@/components/AudioProvider";
+import { MiniPlayer } from "@/components/MiniPlayer";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
 
 const display = Rye({
@@ -21,9 +25,12 @@ const handwriting = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "JohnPat Music | Country Songwriter",
+  title: {
+    default: "JohnPat | Country · Southern Rock · Americana Songwriter",
+    template: "%s | JohnPat",
+  },
   description:
-    "Original country songs written from faith, family, hard work, heartbreak, and the life we leave behind.",
+    "Original Country, Southern Rock, and Americana songs available for artists, bands, producers, and publishers.",
 };
 
 export default function RootLayout({
@@ -36,7 +43,14 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${serif.variable} ${handwriting.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <AudioProvider>
+          <SiteHeader />
+          <div className="flex-1 pb-24">{children}</div>
+          <SiteFooter />
+          <MiniPlayer />
+        </AudioProvider>
+      </body>
     </html>
   );
 }
