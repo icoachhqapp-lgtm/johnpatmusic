@@ -6,9 +6,20 @@ import { SongCard } from "@/components/SongCard";
 import { getCatalogPreview, getFeaturedSong } from "@/data/songs";
 
 export const metadata: Metadata = {
-  title: "JohnPat | Original Songs Looking for the Right Voice",
+  title: {
+    absolute: "JohnPat | Original Songs Looking for the Right Voice",
+  },
   description:
     "Original Country, Southern Rock, and Americana songs available for artists, bands, producers, and publishers.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "JohnPat | Original Songs Looking for the Right Voice",
+    description:
+      "Original Country, Southern Rock, and Americana songs available for artists, bands, producers, and publishers.",
+    url: "/",
+  },
 };
 
 export default function HomePage() {
@@ -180,7 +191,7 @@ export default function HomePage() {
 
           <div className="catalog-grid mt-12">
             {preview.map((song) => (
-              <SongCard key={song.slug} song={song} />
+              <SongCard key={song.slug} song={song} layout="grid" />
             ))}
           </div>
         </div>

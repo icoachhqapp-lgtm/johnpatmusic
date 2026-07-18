@@ -5,6 +5,15 @@ export const metadata: Metadata = {
   title: "For Artists",
   description:
     "Original Country, Southern Rock, and Americana songs available for artists, bands, producers, and publishers.",
+  alternates: {
+    canonical: "/for-artists",
+  },
+  openGraph: {
+    title: "For Artists | JohnPat",
+    description:
+      "Original Country, Southern Rock, and Americana songs available for artists, bands, producers, and publishers.",
+    url: "/for-artists",
+  },
 };
 
 const inquiryCategories = [

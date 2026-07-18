@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { formatTime, useAudioPlayer } from "@/components/AudioProvider";
 
@@ -12,6 +13,8 @@ export function MiniPlayer() {
     volume,
     isMuted,
     togglePlayPause,
+    playPrevious,
+    playNext,
     seek,
     setVolume,
     toggleMute,
@@ -25,20 +28,40 @@ export function MiniPlayer() {
   const unavailable = status === "unavailable";
 
   return (
-    <div
-      className="mini-player"
-      role="region"
-      aria-label="Now playing"
-    >
+    <div className="mini-player" role="region" aria-label="Now playing">
       <div className="mini-player__inner">
-        <div className="mini-player__meta">
-          <p className="mini-player__label">
-            {unavailable ? "Demo coming soon" : "Now playing"}
-          </p>
-          <p className="mini-player__title font-display">{currentSong.title}</p>
+        <div className="mini-player__track">
+          <div className="mini-player__art">
+            <Image
+              src={currentSong.artworkPath}
+              alt={`Artwork for ${currentSong.title}`}
+              width={72}
+              height={72}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="mini-player__meta">
+            <p className="mini-player__label">
+              {unavailable ? "Demo coming soon" : "Now playing"}
+            </p>
+            <p className="mini-player__title font-display">
+              {currentSong.title}
+            </p>
+            <p className="mini-player__genres">
+              {currentSong.genres.join(" · ")}
+            </p>
+          </div>
         </div>
 
         <div className="mini-player__controls">
+          <button
+            type="button"
+            className="player-icon-btn player-icon-btn--small"
+            onClick={playPrevious}
+            aria-label="Previous song"
+          >
+            ‹‹
+          </button>
           <button
             type="button"
             className="player-icon-btn"
@@ -54,9 +77,17 @@ export function MiniPlayer() {
           >
             {status === "playing" ? "❚❚" : "▶"}
           </button>
+          <button
+            type="button"
+            className="player-icon-btn player-icon-btn--small"
+            onClick={playNext}
+            aria-label="Next song"
+          >
+            ››
+          </button>
 
           <div className="mini-player__timeline">
-            <span className="mini-player__time" aria-hidden={!unavailable}>
+            <span className="mini-player__time">
               {unavailable ? "—" : formatTime(currentTime)}
             </span>
             <input
@@ -73,7 +104,9 @@ export function MiniPlayer() {
             <span className="mini-player__time">
               {unavailable
                 ? currentSong.duration
-                : formatTime(duration || 0)}
+                : duration > 0
+                  ? formatTime(duration)
+                  : currentSong.duration}
             </span>
           </div>
         </div>
@@ -111,9 +144,9 @@ export function MiniPlayer() {
             type="button"
             className="player-icon-btn player-icon-btn--small"
             onClick={stop}
-            aria-label="Stop"
+            aria-label="Close player"
           >
-            Stop
+            Close
           </button>
         </div>
       </div>

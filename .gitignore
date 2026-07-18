@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# large wav masters (MP3 demos in public/audio are used in production)
+/public/audio/*.wav
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

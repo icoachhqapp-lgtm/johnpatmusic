@@ -13,7 +13,7 @@ export function CatalogBrowser() {
   const filtered = useMemo(() => filterSongsByGenre(filter), [filter]);
 
   return (
-    <div>
+    <div className="catalog-browser">
       <div
         className="catalog-filters"
         role="tablist"
@@ -34,12 +34,18 @@ export function CatalogBrowser() {
       </div>
 
       <p className="catalog-count">
-        Showing {filtered.length} song{filtered.length === 1 ? "" : "s"}
+        {filtered.length} original song{filtered.length === 1 ? "" : "s"} ·
+        concept demos for recording inquiry
       </p>
 
-      <div className="catalog-grid">
-        {filtered.map((song) => (
-          <SongCard key={song.slug} song={song} />
+      <div className="catalog-list">
+        {filtered.map((song, index) => (
+          <div key={song.slug} className="catalog-list__item reveal">
+            <span className="catalog-list__index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <SongCard song={song} layout="list" />
+          </div>
         ))}
       </div>
     </div>

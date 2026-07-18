@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { formatTime, useAudioPlayer } from "@/components/AudioProvider";
 import type { Song } from "@/data/songs";
@@ -8,6 +9,8 @@ export function FullAudioPlayer({ song }: { song: Song }) {
   const {
     playSong,
     togglePlayPause,
+    playPrevious,
+    playNext,
     seek,
     setVolume,
     toggleMute,
@@ -33,23 +36,45 @@ export function FullAudioPlayer({ song }: { song: Song }) {
   };
 
   return (
-    <div className="full-player" role="region" aria-label={`${song.title} audio player`}>
+    <div
+      className="full-player"
+      role="region"
+      aria-label={`${song.title} audio player`}
+    >
       <div className="full-player__top">
-        <button
-          type="button"
-          className="player-icon-btn player-icon-btn--large"
-          onClick={handlePlay}
-          aria-label={
-            unavailable
-              ? "Demo coming soon"
-              : playing
-                ? "Pause"
-                : "Play concept demo"
-          }
-          disabled={unavailable}
-        >
-          {loading ? "…" : playing ? "❚❚" : "▶"}
-        </button>
+        <div className="full-player__transport">
+          <button
+            type="button"
+            className="player-icon-btn player-icon-btn--small"
+            onClick={playPrevious}
+            aria-label="Previous song"
+          >
+            ‹‹
+          </button>
+          <button
+            type="button"
+            className="player-icon-btn player-icon-btn--large"
+            onClick={handlePlay}
+            aria-label={
+              unavailable
+                ? "Demo coming soon"
+                : playing
+                  ? "Pause"
+                  : "Play concept demo"
+            }
+            disabled={unavailable}
+          >
+            {loading ? "…" : playing ? "❚❚" : "▶"}
+          </button>
+          <button
+            type="button"
+            className="player-icon-btn player-icon-btn--small"
+            onClick={playNext}
+            aria-label="Next song"
+          >
+            ››
+          </button>
+        </div>
 
         <div>
           <p className="eyebrow" style={{ marginBottom: "0.35rem" }}>
@@ -82,9 +107,9 @@ export function FullAudioPlayer({ song }: { song: Song }) {
         <span>
           {unavailable
             ? song.duration
-            : formatTime(displayDuration || 0) === "0:00"
-              ? song.duration
-              : formatTime(displayDuration)}
+            : displayDuration > 0
+              ? formatTime(displayDuration)
+              : song.duration}
         </span>
       </div>
 

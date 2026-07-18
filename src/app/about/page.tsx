@@ -5,6 +5,15 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "JohnPat is a Country, Southern Rock, and Americana songwriter writing original songs for the right voice.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About | JohnPat",
+    description:
+      "JohnPat is a Country, Southern Rock, and Americana songwriter writing original songs for the right voice.",
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

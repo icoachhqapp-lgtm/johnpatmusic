@@ -1,13 +1,16 @@
-# Place concept demo audio files here using these filenames:
-# what-it-takes.wav
-# she-only-looks-at-me-that-way.wav
-# can-i-come-along.wav
-# back-when-time-moved-slow.wav
-# still-got-some-fight.wav
-# believe.wav
-# home-aint-a-house.wav
-# not-long-enough.wav
-# leave-it-better-than-you-found-it.wav
-# honky-tonk-revival.wav
+# Concept demo audio files for the JohnPat songwriter catalog.
 #
-# The player UI shows "Demo coming soon" when a file is missing.
+# Preferred playback format: MP3
+# what-it-takes.mp3
+# she-only-looks-at-me-that-way.mp3
+# can-i-come-along.mp3
+# back-when-time-moved-slow.mp3
+# still-got-some-fight.mp3
+# believe.mp3
+# home-aint-a-house.mp3
+# not-long-enough.mp3
+# leave-it-better-than-you-found-it.mp3
+# honky-tonk-revival.mp3
+#
+# WAV masters may also be kept here for archive.
+# The player shows "Demo coming soon" if a referenced file is missing.

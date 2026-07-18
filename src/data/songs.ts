@@ -1,8 +1,6 @@
 export type Genre = "Country" | "Southern Rock" | "Americana" | "Blues Rock";
 
-export type VocalFormat =
-  | "Male vocal"
-  | "Male/Female duet";
+export type VocalFormat = "Male vocal" | "Male/Female duet";
 
 export interface Song {
   slug: string;
@@ -19,7 +17,10 @@ export interface Song {
   featured: boolean;
   vocalFormat: VocalFormat;
   feel: string;
+  copyright: string;
 }
+
+const COPYRIGHT = "© 2026 JohnPat Music. All rights reserved.";
 
 export const songs: Song[] = [
   {
@@ -28,18 +29,19 @@ export const songs: Song[] = [
     genres: ["Country", "Southern Rock"],
     themes: ["hard work", "resilience", "responsibility", "faith"],
     description:
-      "A driving anthem about showing up when it counts—about the grit, faith, and responsibility it takes to keep going when quitting would be easier.",
+      "A driving anthem about grit, faith, and the responsibility it takes to keep going.",
     story:
       "Written for the moments when life asks more of you than you think you have. This song sits at the crossroads of Country storytelling and Southern Rock muscle—built for a strong male vocal that can carry both swagger and sincerity.",
     lyricExcerpt:
       "You give what it takes when the road gets long…\nyou give what it takes when your back ain’t strong…",
-    audioPath: "/audio/what-it-takes.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/what-it-takes.mp3",
+    artworkPath: "/images/songs/what-it-takes.png",
     duration: "3:42",
     availableForRecording: true,
     featured: true,
     vocalFormat: "Male vocal",
     feel: "Mid-tempo drive · anthemic",
+    copyright: COPYRIGHT,
   },
   {
     slug: "she-only-looks-at-me-that-way",
@@ -47,18 +49,19 @@ export const songs: Song[] = [
     genres: ["Country"],
     themes: ["love", "devotion", "relationship"],
     description:
-      "A tender Country love song about the look that belongs to one person alone—quiet devotion wrapped in a memorable melody.",
+      "A tender Country love song about the look that belongs to one person alone.",
     story:
       "Some love songs shout. This one watches. It’s about that rare glance across a room that says everything words can’t. Written as a Male/Female duet so two voices can carry the conversation.",
     lyricExcerpt:
       "She only looks at me that way…\nlike the whole world fell away…",
-    audioPath: "/audio/she-only-looks-at-me-that-way.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/she-only-looks-at-me-that-way.mp3",
+    artworkPath: "/images/songs/she-only-looks-at-me-that-way.png",
     duration: "3:28",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male/Female duet",
     feel: "Warm mid-tempo · intimate",
+    copyright: COPYRIGHT,
   },
   {
     slug: "can-i-come-along",
@@ -66,18 +69,19 @@ export const songs: Song[] = [
     genres: ["Country", "Americana"],
     themes: ["fatherhood", "family", "growing up"],
     description:
-      "A father-and-child story about time moving too fast—and the simple wish to share one more mile of the journey.",
+      "A father-and-child story about time moving too fast—and wanting one more mile together.",
     story:
       "This one came from watching a kid grow up overnight. It’s Country and Americana at heart: soft acoustic bones, honest lyric, and a chorus that parents will feel in their chest.",
     lyricExcerpt:
       "Can I come along… just a little while longer…\nbefore the road gets wider and you’re stronger…",
-    audioPath: "/audio/can-i-come-along.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/can-i-come-along.mp3",
+    artworkPath: "/images/songs/can-i-come-along.png",
     duration: "3:55",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
     feel: "Ballad · reflective",
+    copyright: COPYRIGHT,
   },
   {
     slug: "back-when-time-moved-slow",
@@ -85,18 +89,19 @@ export const songs: Song[] = [
     genres: ["Country", "Americana"],
     themes: ["memories", "family", "friendship", "simpler times"],
     description:
-      "A nostalgic look back at the days when evenings lasted longer and people stayed awhile—memory, friendship, and home.",
+      "A nostalgic look back at evenings that lasted longer and people who stayed awhile.",
     story:
       "Written like a porch conversation at dusk. Two voices trade verses about the years that shaped them—perfect for a Male/Female duet that feels lived-in and warm.",
     lyricExcerpt:
       "Back when time moved slow…\nand nobody was in a hurry to go…",
-    audioPath: "/audio/back-when-time-moved-slow.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/back-when-time-moved-slow.mp3",
+    artworkPath: "/images/songs/back-when-time-moved-slow.png",
     duration: "4:02",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male/Female duet",
     feel: "Easy mid-tempo · nostalgic",
+    copyright: COPYRIGHT,
   },
   {
     slug: "still-got-some-fight",
@@ -104,18 +109,19 @@ export const songs: Song[] = [
     genres: ["Southern Rock", "Blues Rock"],
     themes: ["survival", "perseverance", "grit"],
     description:
-      "A Southern Rock / Blues Rock stomper for anyone who’s been knocked down and refuses to stay there.",
+      "A Southern Rock stomper for anyone who’s been knocked down and refuses to stay there.",
     story:
       "Built for grit. Thick guitars, bluesy edge, and a vocal that sounds like it’s been through something. This is survival music—loud enough for the stage, honest enough for the highway.",
     lyricExcerpt:
       "I still got some fight left in me…\nain’t down yet and I don’t aim to be…",
-    audioPath: "/audio/still-got-some-fight.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/still-got-some-fight.mp3",
+    artworkPath: "/images/songs/still-got-some-fight.png",
     duration: "3:36",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
     feel: "Up-tempo · Southern Rock edge",
+    copyright: COPYRIGHT,
   },
   {
     slug: "believe",
@@ -123,18 +129,19 @@ export const songs: Song[] = [
     genres: ["Country", "Americana"],
     themes: ["faith", "hope", "endurance"],
     description:
-      "A faith-centered song about holding on when you can’t yet see the other side—hope set to melody.",
+      "A faith-centered song about holding on when you can’t yet see the other side.",
     story:
       "Written for quiet courage. Country and Americana textures carry a lyric about faith that doesn’t shout—it steadies. Suited to a sincere male vocal with room to breathe.",
     lyricExcerpt:
       "Believe when the night won’t break…\nbelieve in the promise you can’t yet take…",
-    audioPath: "/audio/believe.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/believe.mp3",
+    artworkPath: "/images/songs/believe.png",
     duration: "3:48",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
     feel: "Mid-tempo · reverent lift",
+    copyright: COPYRIGHT,
   },
   {
     slug: "home-aint-a-house",
@@ -142,18 +149,19 @@ export const songs: Song[] = [
     genres: ["Country", "Americana"],
     themes: ["home", "love", "belonging", "family"],
     description:
-      "A reminder that walls don’t make a home—people do. Warm Country/Americana built for two voices.",
+      "A reminder that walls don’t make a home—people do.",
     story:
       "This song belongs on a kitchen table as much as a stage. It’s about belonging—the faces, the laughter, the ones who wait up. Written as a Male/Female duet for that shared truth.",
     lyricExcerpt:
       "Home ain’t a house… it ain’t brick and wood…\nit’s the ones who love you like nobody could…",
-    audioPath: "/audio/home-aint-a-house.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/home-aint-a-house.mp3",
+    artworkPath: "/images/songs/home-aint-a-house.png",
     duration: "3:40",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male/Female duet",
     feel: "Warm mid-tempo · heartfelt",
+    copyright: COPYRIGHT,
   },
   {
     slug: "not-long-enough",
@@ -161,18 +169,19 @@ export const songs: Song[] = [
     genres: ["Country"],
     themes: ["weekends", "dancing", "friendship", "living fully"],
     description:
-      "A feel-good Country song about weekends that end too soon—dancing, friendship, and living fully while you can.",
+      "A feel-good Country song about weekends that end too soon and living fully while you can.",
     story:
       "Written for Friday nights and last-call smiles. Upbeat Country energy with a hook that invites a crowd to sing along. Built for a male vocal that can smile through the mic.",
     lyricExcerpt:
       "These nights ain’t long enough…\nwhen the band’s still playing and the road’s still rough…",
-    audioPath: "/audio/not-long-enough.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/not-long-enough.mp3",
+    artworkPath: "/images/songs/not-long-enough.png",
     duration: "3:22",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
     feel: "Upbeat · dancefloor Country",
+    copyright: COPYRIGHT,
   },
   {
     slug: "leave-it-better-than-you-found-it",
@@ -180,18 +189,19 @@ export const songs: Song[] = [
     genres: ["Country", "Americana"],
     themes: ["legacy", "character", "responsibility"],
     description:
-      "A song about character and legacy—about the quiet choice to leave people, places, and promises better than you found them.",
+      "A song about character and legacy—leaving people and places better than you found them.",
     story:
       "The title says the mission. This is Country and Americana with purpose: a lyric about responsibility that doesn’t preach—it invites. Strong male vocal territory with a memorable title hook.",
     lyricExcerpt:
       "Leave it better than you found it…\nleave a little light where the dark surrounded it…",
-    audioPath: "/audio/leave-it-better-than-you-found-it.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/leave-it-better-than-you-found-it.mp3",
+    artworkPath: "/images/songs/leave-it-better-than-you-found-it.png",
     duration: "4:05",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
     feel: "Steady mid-tempo · anthemic",
+    copyright: COPYRIGHT,
   },
   {
     slug: "honky-tonk-revival",
@@ -199,18 +209,19 @@ export const songs: Song[] = [
     genres: ["Country", "Southern Rock"],
     themes: ["dancing", "nightlife", "celebration", "country tradition"],
     description:
-      "A celebration of the honky-tonk spirit—boots on wood floors, neon glow, and Country tradition coming alive again.",
+      "A celebration of the honky-tonk spirit—neon glow, wood floors, and Country tradition alive again.",
     story:
       "Built for the dance floor and the late-night crowd. Country meets Southern Rock swagger with a chorus meant to turn a room into a revival. Male vocal with attitude and joy.",
     lyricExcerpt:
       "It’s a honky tonk revival…\nbring your broken heart and your survival…",
-    audioPath: "/audio/honky-tonk-revival.wav",
-    artworkPath: "/album-cover.png",
+    audioPath: "/audio/honky-tonk-revival.mp3",
+    artworkPath: "/images/songs/honky-tonk-revival.png",
     duration: "3:30",
     availableForRecording: true,
     featured: false,
     vocalFormat: "Male vocal",
     feel: "Up-tempo · neon-lit Country",
+    copyright: COPYRIGHT,
   },
 ];
 
@@ -227,6 +238,22 @@ export function getFeaturedSong(): Song {
 
 export function getCatalogPreview(limit = 6): Song[] {
   return songs.slice(0, limit);
+}
+
+export function getSongIndex(slug: string): number {
+  return songs.findIndex((song) => song.slug === slug);
+}
+
+export function getAdjacentSongs(slug: string): {
+  previous: Song | null;
+  next: Song | null;
+} {
+  const index = getSongIndex(slug);
+  if (index < 0) return { previous: null, next: null };
+  return {
+    previous: index > 0 ? songs[index - 1] : songs[songs.length - 1],
+    next: index < songs.length - 1 ? songs[index + 1] : songs[0],
+  };
 }
 
 export const ALL_GENRE_FILTERS = [

@@ -6,6 +6,15 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Recording, licensing, publishing, and collaboration inquiries for JohnPat original songs.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact | JohnPat",
+    description:
+      "Recording, licensing, publishing, and collaboration inquiries for JohnPat original songs.",
+    url: "/contact",
+  },
 };
 
 interface ContactPageProps {

@@ -27,6 +27,29 @@ export async function generateMetadata({
   return {
     title: song.title,
     description: song.description,
+    alternates: {
+      canonical: `/songs/${song.slug}`,
+    },
+    openGraph: {
+      title: `${song.title} | JohnPat`,
+      description: song.description,
+      url: `/songs/${song.slug}`,
+      type: "music.song",
+      images: [
+        {
+          url: song.artworkPath,
+          width: 1200,
+          height: 1200,
+          alt: `Cover artwork for ${song.title}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${song.title} | JohnPat`,
+      description: song.description,
+      images: [song.artworkPath],
+    },
   };
 }
 

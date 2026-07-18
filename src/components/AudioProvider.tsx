@@ -10,9 +10,14 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Song } from "@/data/songs";
+import { getAdjacentSongs, type Song } from "@/data/songs";
 
-export type AudioStatus = "idle" | "loading" | "playing" | "paused" | "unavailable";
+export type AudioStatus =
+  | "idle"
+  | "loading"
+  | "playing"
+  | "paused"
+  | "unavailable";
 
 interface AudioContextValue {
   currentSong: Song | null;
@@ -23,6 +28,8 @@ interface AudioContextValue {
   isMuted: boolean;
   playSong: (song: Song) => void;
   togglePlayPause: () => void;
+  playPrevious: () => void;
+  playNext: () => void;
   pause: () => void;
   stop: () => void;
   seek: (time: number) => void;
@@ -40,12 +47,54 @@ function formatSafeDuration(value: number) {
 
 export function AudioProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const currentSongRef = useRef<Song | null>(null);
+  const playSongRef = useRef<(song: Song) => void>(() => undefined);
+
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
   const [status, setStatus] = useState<AudioStatus>("idle");
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolumeState] = useState(0.85);
   const [isMuted, setIsMuted] = useState(false);
+
+  useEffect(() => {
+    currentSongRef.current = currentSong;
+  }, [currentSong]);
+
+  const playSong = useCallback((song: Song) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const currentSrc = audio.getAttribute("src") ?? "";
+    const isSame = currentSrc === song.audioPath;
+
+    if (isSame && !audio.paused && status === "playing") {
+      audio.pause();
+      return;
+    }
+
+    if (isSame && (status === "paused" || audio.paused) && status !== "unavailable") {
+      void audio.play().catch(() => setStatus("unavailable"));
+      return;
+    }
+
+    audio.pause();
+    setCurrentSong(song);
+    setStatus("loading");
+    setCurrentTime(0);
+    setDuration(0);
+    audio.src = song.audioPath;
+    audio.load();
+
+    void audio
+      .play()
+      .then(() => setStatus("playing"))
+      .catch(() => setStatus("unavailable"));
+  }, [status]);
+
+  useEffect(() => {
+    playSongRef.current = playSong;
+  }, [playSong]);
 
   useEffect(() => {
     const audio = new Audio();
@@ -56,9 +105,14 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     const onLoadedMetadata = () =>
       setDuration(formatSafeDuration(audio.duration));
     const onEnded = () => {
-      setStatus("paused");
-      setCurrentTime(0);
-      audio.currentTime = 0;
+      const song = currentSongRef.current;
+      if (!song) {
+        setStatus("paused");
+        setCurrentTime(0);
+        return;
+      }
+      const { next } = getAdjacentSongs(song.slug);
+      if (next) playSongRef.current(next);
     };
     const onPlaying = () => setStatus("playing");
     const onPause = () => {
@@ -100,38 +154,6 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     audio.volume = isMuted ? 0 : volume;
   }, [volume, isMuted]);
 
-  const playSong = useCallback((song: Song) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const currentSrc = audio.getAttribute("src") ?? "";
-    const isSame = currentSrc === song.audioPath;
-
-    if (isSame && status === "playing") {
-      audio.pause();
-      return;
-    }
-
-    if (isSame && status === "paused") {
-      void audio.play().catch(() => setStatus("unavailable"));
-      return;
-    }
-
-    // Stop current track before starting another (or retrying unavailable)
-    audio.pause();
-    setCurrentSong(song);
-    setStatus("loading");
-    setCurrentTime(0);
-    setDuration(0);
-    audio.src = song.audioPath;
-    audio.load();
-
-    void audio
-      .play()
-      .then(() => setStatus("playing"))
-      .catch(() => setStatus("unavailable"));
-  }, [status]);
-
   const togglePlayPause = useCallback(() => {
     const audio = audioRef.current;
     if (!audio || !currentSong) return;
@@ -147,6 +169,18 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       audio.pause();
     }
   }, [currentSong, playSong, status]);
+
+  const playPrevious = useCallback(() => {
+    if (!currentSong) return;
+    const { previous } = getAdjacentSongs(currentSong.slug);
+    if (previous) playSong(previous);
+  }, [currentSong, playSong]);
+
+  const playNext = useCallback(() => {
+    if (!currentSong) return;
+    const { next } = getAdjacentSongs(currentSong.slug);
+    if (next) playSong(next);
+  }, [currentSong, playSong]);
 
   const pause = useCallback(() => {
     audioRef.current?.pause();
@@ -165,7 +199,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     (time: number) => {
       const audio = audioRef.current;
       if (!audio || status === "unavailable") return;
-      const next = Math.max(0, Math.min(time, formatSafeDuration(audio.duration) || time));
+      const next = Math.max(
+        0,
+        Math.min(time, formatSafeDuration(audio.duration) || time),
+      );
       audio.currentTime = next;
       setCurrentTime(next);
     },
@@ -202,6 +239,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       isMuted,
       playSong,
       togglePlayPause,
+      playPrevious,
+      playNext,
       pause,
       stop,
       seek,
@@ -219,6 +258,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       isMuted,
       playSong,
       togglePlayPause,
+      playPrevious,
+      playNext,
       pause,
       stop,
       seek,

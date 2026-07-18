@@ -5,7 +5,7 @@ import type { Song } from "@/data/songs";
 
 interface DemoPlayButtonProps {
   song: Song;
-  variant?: "primary" | "ghost" | "card";
+  variant?: "primary" | "ghost" | "card" | "overlay";
   className?: string;
 }
 
@@ -21,10 +21,10 @@ export function DemoPlayButton({
   const unavailable = current && status === "unavailable";
   const loading = current && status === "loading";
 
-  let label = "Play Demo";
+  let label = "Play";
   if (loading) label = "Loading…";
   else if (unavailable) label = "Demo Coming Soon";
-  else if (playing) label = "Pause Demo";
+  else if (playing) label = "Pause";
 
   return (
     <button
@@ -37,7 +37,7 @@ export function DemoPlayButton({
       <span className="demo-play-btn__icon" aria-hidden="true">
         {unavailable ? "○" : playing ? "❚❚" : "▶"}
       </span>
-      <span>{label}</span>
+      {variant !== "overlay" ? <span>{label}</span> : null}
     </button>
   );
 }
