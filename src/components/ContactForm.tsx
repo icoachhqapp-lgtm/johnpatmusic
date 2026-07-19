@@ -44,7 +44,7 @@ export function ContactForm({ initialSongSlug }: ContactFormProps) {
         message,
       ].join("\n"),
     );
-    return `mailto:contact@johnpatmusic.com?subject=${subject}&body=${body}`;
+    return `mailto:songs@johnpatmusic.com?subject=${subject}&body=${body}`;
   }, [name, email, company, inquiryType, songInterest, message]);
 
   return (
