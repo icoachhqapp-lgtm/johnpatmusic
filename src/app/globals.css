@@ -880,6 +880,46 @@ textarea:focus-visible {
   border-color: var(--amber);
 }
 
+.contact-form__honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-form__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(7, 6, 5, 0.78);
+  backdrop-filter: blur(4px);
+}
+
+.contact-form__modal-panel {
+  width: min(100%, 32rem);
+  border: 1px solid rgba(210, 163, 79, 0.45);
+  background: linear-gradient(160deg, #1c1712, #0e0c0a);
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+.contact-form__modal-panel:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.contact-form__modal-copy {
+  margin: 0.85rem 0 1.35rem;
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--cream);
+}
+
 .contact-form .button-primary:disabled {
   cursor: not-allowed;
   opacity: 0.7;

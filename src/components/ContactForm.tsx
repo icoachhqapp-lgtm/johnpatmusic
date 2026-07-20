@@ -27,7 +27,6 @@ const ERROR_MESSAGE =
 
 interface ContactFormProps {
   initialSongSlug?: string;
-  /** Optional default inquiry type for deep links from other pages */
   defaultInquiryType?: InquiryType;
 }
 
@@ -45,17 +44,18 @@ export function ContactForm({
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
+  const [companyArtistBand, setCompanyArtistBand] = useState("");
   const [inquiryType, setInquiryType] =
     useState<InquiryType>(defaultInquiryType);
-  const [songInterest, setSongInterest] = useState(initialSong);
+  const [songTitle, setSongTitle] = useState(initialSong);
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
-    setSongInterest(initialSong);
+    setSongTitle(initialSong);
   }, [initialSong]);
 
   useEffect(() => {
@@ -66,10 +66,16 @@ export function ContactForm({
   function resetFields() {
     setName("");
     setEmail("");
-    setCompany("");
+    setCompanyArtistBand("");
     setInquiryType(defaultInquiryType);
-    setSongInterest(initialSong);
+    setSongTitle(initialSong);
     setMessage("");
+    setHoneypot("");
+  }
+
+  function dismissStatus() {
+    setStatus("idle");
+    setStatusMessage("");
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -82,27 +88,32 @@ export function ContactForm({
     setStatusMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
           email,
-          company,
+          companyArtistBand,
           inquiryType,
-          songInterest,
+          songTitle,
           message,
+          pageUrl: typeof window !== "undefined" ? window.location.href : "",
+          honeypot,
         }),
       });
 
-      let payload: { ok?: boolean; error?: string } = {};
+      let payload: { success?: boolean; error?: string } = {};
       try {
-        payload = (await response.json()) as { ok?: boolean; error?: string };
+        payload = (await response.json()) as {
+          success?: boolean;
+          error?: string;
+        };
       } catch {
         payload = {};
       }
 
-      if (!response.ok || !payload.ok) {
+      if (!response.ok || !payload.success) {
         setStatus("error");
         setStatusMessage(payload.error || ERROR_MESSAGE);
         return;
@@ -121,39 +132,68 @@ export function ContactForm({
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} noValidate={false}>
-      {status !== "idle" ? (
+    <form className="contact-form" onSubmit={handleSubmit}>
+      {status === "success" ? (
+        <div
+          className="contact-form__modal"
+          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) dismissStatus();
+          }}
+        >
+          <div
+            ref={statusRef}
+            className="contact-form__modal-panel"
+            role="status"
+            tabIndex={-1}
+            aria-live="polite"
+            aria-labelledby={`${formId}-success-title`}
+            id={`${formId}-status`}
+          >
+            <p className="eyebrow" id={`${formId}-success-title`}>
+              Inquiry Received
+            </p>
+            <p className="contact-form__modal-copy">{statusMessage}</p>
+            <button
+              type="button"
+              className="button-primary"
+              onClick={dismissStatus}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {status === "error" ? (
         <div
           ref={statusRef}
-          className={
-            status === "success"
-              ? "contact-form__status contact-form__status--success"
-              : "contact-form__status contact-form__status--error"
-          }
-          role={status === "success" ? "status" : "alert"}
+          className="contact-form__status contact-form__status--error"
+          role="alert"
           tabIndex={-1}
-          aria-live={status === "success" ? "polite" : "assertive"}
+          aria-live="assertive"
           id={`${formId}-status`}
         >
           <p>{statusMessage}</p>
-          {status === "success" ? (
-            <button
-              type="button"
-              className="contact-form__status-dismiss"
-              onClick={() => {
-                setStatus("idle");
-                setStatusMessage("");
-              }}
-            >
-              Dismiss
-            </button>
-          ) : (
-            <p className="contact-form__status-hint">
-              Your entered information has been kept so you can try again.
-            </p>
-          )}
+          <p className="contact-form__status-hint">
+            Your entered information has been kept so you can try again.
+          </p>
         </div>
       ) : null}
+
+      {/* Honeypot — hidden from real users */}
+      <div className="contact-form__honeypot" aria-hidden="true">
+        <label htmlFor={`${formId}-website`}>Website</label>
+        <input
+          id={`${formId}-website`}
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(event) => setHoneypot(event.target.value)}
+        />
+      </div>
 
       <div className="contact-form__grid">
         <label className="field">
@@ -184,10 +224,10 @@ export function ContactForm({
         <label className="field field--full">
           <span>Company or Artist / Band Name</span>
           <input
-            name="company"
-            value={company}
+            name="companyArtistBand"
+            value={companyArtistBand}
             disabled={sending}
-            onChange={(event) => setCompany(event.target.value)}
+            onChange={(event) => setCompanyArtistBand(event.target.value)}
           />
         </label>
 
@@ -212,10 +252,10 @@ export function ContactForm({
         <label className="field">
           <span>Song of Interest</span>
           <select
-            name="song"
-            value={songInterest}
+            name="songTitle"
+            value={songTitle}
             disabled={sending}
-            onChange={(event) => setSongInterest(event.target.value)}
+            onChange={(event) => setSongTitle(event.target.value)}
           >
             <option value="">Select a song (optional)</option>
             {songs.map((song) => (
@@ -240,8 +280,8 @@ export function ContactForm({
       </div>
 
       <p className="contact-form__note">
-        Inquiries are sent to songs@johnpatmusic.com. Choose the inquiry type
-        that best matches your request—recording, licensing, publishing, or
+        Inquiries are delivered to songs@johnpatmusic.com. Choose the inquiry
+        type that best matches your request—recording, licensing, publishing, or
         collaboration.
       </p>
 
