@@ -16,8 +16,6 @@ export function useAudioMetadata(audioPath: string | null | undefined) {
 
   useEffect(() => {
     if (!audioPath) {
-      setDuration(0);
-      setStatus("idle");
       return;
     }
 
@@ -68,6 +66,10 @@ export function useAudioMetadata(audioPath: string | null | undefined) {
       }
     };
   }, [audioPath]);
+
+  if (!audioPath) {
+    return { duration: 0, status: "idle" as const };
+  }
 
   return { duration, status };
 }

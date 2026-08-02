@@ -130,10 +130,14 @@ export default async function SongPage({ params }: SongPageProps) {
               <div>
                 <dt>Duration</dt>
                 <dd>
-                  <SongInfoDuration
-                    audioPath={song.audioPath}
-                    songSlug={song.slug}
-                  />
+                  {song.released ? (
+                    <SongInfoDuration
+                      audioPath={song.audioPath}
+                      songSlug={song.slug}
+                    />
+                  ) : (
+                    "Coming Soon"
+                  )}
                 </dd>
               </div>
             </dl>

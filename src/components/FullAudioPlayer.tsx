@@ -4,6 +4,7 @@ import Link from "next/link";
 import { formatAudioTime } from "@/lib/formatAudioTime";
 import { useAudioPlayer } from "@/components/AudioProvider";
 import { AudioDuration } from "@/components/AudioDuration";
+import { ComingSoonNotice } from "@/components/ComingSoonNotice";
 import type { Song } from "@/data/songs";
 
 export function FullAudioPlayer({ song }: { song: Song }) {
@@ -23,6 +24,10 @@ export function FullAudioPlayer({ song }: { song: Song }) {
     volume,
     isMuted,
   } = useAudioPlayer();
+
+  if (!song.released) {
+    return <ComingSoonNotice />;
+  }
 
   const current = isCurrentSong(song.slug);
   const playing = isPlayingSong(song.slug);

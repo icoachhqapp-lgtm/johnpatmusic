@@ -920,6 +920,54 @@ textarea:focus-visible {
   color: var(--cream);
 }
 
+.coming-soon {
+  border: 1px solid rgba(210, 163, 79, 0.28);
+  background: rgba(14, 12, 10, 0.9);
+  padding: 1.35rem 1.25rem;
+  text-align: center;
+}
+
+.coming-soon__label {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.45rem;
+  letter-spacing: 0.06em;
+  color: var(--amber-bright);
+}
+
+.coming-soon__copy {
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--dust);
+}
+
+.coming-soon--compact {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  border-color: rgba(210, 163, 79, 0.35);
+}
+
+.coming-soon--compact .coming-soon__label {
+  font-family: var(--font-serif), serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.coming-soon--card {
+  width: 100%;
+}
+
+.coming-soon--overlay {
+  min-width: 7.5rem;
+  border-radius: 0;
+  background: rgba(7, 6, 5, 0.72);
+}
+
 .contact-form .button-primary:disabled {
   cursor: not-allowed;
   opacity: 0.7;

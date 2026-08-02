@@ -14,6 +14,7 @@ export interface Song {
   artworkPath: string;
   availableForRecording: boolean;
   featured: boolean;
+  released: boolean;
   vocalFormat: VocalFormat;
   feel: string;
   copyright: string;
@@ -37,6 +38,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/what-it-takes.png",
     availableForRecording: true,
     featured: true,
+    released: false,
     vocalFormat: "Male vocal",
     feel: "Mid-tempo drive · anthemic",
     copyright: COPYRIGHT,
@@ -56,6 +58,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/she-only-looks-at-me-that-way.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male/Female duet",
     feel: "Warm mid-tempo · intimate",
     copyright: COPYRIGHT,
@@ -75,6 +78,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/can-i-come-along.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male vocal",
     feel: "Ballad · reflective",
     copyright: COPYRIGHT,
@@ -94,6 +98,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/back-when-time-moved-slow.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male/Female duet",
     feel: "Easy mid-tempo · nostalgic",
     copyright: COPYRIGHT,
@@ -113,6 +118,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/still-got-some-fight.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male vocal",
     feel: "Up-tempo · Southern Rock edge",
     copyright: COPYRIGHT,
@@ -132,6 +138,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/believe.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male vocal",
     feel: "Mid-tempo · reverent lift",
     copyright: COPYRIGHT,
@@ -151,6 +158,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/home-aint-a-house.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male/Female duet",
     feel: "Warm mid-tempo · heartfelt",
     copyright: COPYRIGHT,
@@ -170,6 +178,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/not-long-enough.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male vocal",
     feel: "Upbeat · dancefloor Country",
     copyright: COPYRIGHT,
@@ -189,6 +198,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/leave-it-better-than-you-found-it.png",
     availableForRecording: true,
     featured: false,
+    released: false,
     vocalFormat: "Male vocal",
     feel: "Steady mid-tempo · anthemic",
     copyright: COPYRIGHT,
@@ -208,6 +218,7 @@ export const songs: Song[] = [
     artworkPath: "/images/songs/honky-tonk-revival.png",
     availableForRecording: true,
     featured: false,
+    released: true,
     vocalFormat: "Male vocal",
     feel: "Up-tempo · neon-lit Country",
     copyright: COPYRIGHT,
@@ -237,11 +248,26 @@ export function getAdjacentSongs(slug: string): {
   previous: Song | null;
   next: Song | null;
 } {
-  const index = getSongIndex(slug);
-  if (index < 0) return { previous: null, next: null };
+  const released = songs.filter((song) => song.released);
+  if (released.length === 0) return { previous: null, next: null };
+
+  const index = released.findIndex((song) => song.slug === slug);
+  if (index < 0) {
+    return {
+      previous: released[released.length - 1] ?? null,
+      next: released[0] ?? null,
+    };
+  }
+
   return {
-    previous: index > 0 ? songs[index - 1] : songs[songs.length - 1],
-    next: index < songs.length - 1 ? songs[index + 1] : songs[0],
+    previous:
+      index > 0
+        ? released[index - 1]
+        : released[released.length - 1],
+    next:
+      index < released.length - 1
+        ? released[index + 1]
+        : released[0],
   };
 }
 

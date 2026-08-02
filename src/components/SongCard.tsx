@@ -27,19 +27,25 @@ export function SongCard({
         size="card"
         className="catalog-entry__art"
       >
-        <div className="catalog-entry__play-overlay">
-          <DemoPlayButton song={song} variant="overlay" />
-        </div>
+        {song.released ? (
+          <div className="catalog-entry__play-overlay">
+            <DemoPlayButton song={song} variant="overlay" />
+          </div>
+        ) : null}
       </SongArtwork>
 
       <div className="catalog-entry__body">
         <div className="catalog-entry__meta-row">
           <p className="catalog-entry__genre">{song.genres.join(" · ")}</p>
-          <AudioDuration
-            audioPath={song.audioPath}
-            songSlug={song.slug}
-            className="catalog-entry__duration"
-          />
+          {song.released ? (
+            <AudioDuration
+              audioPath={song.audioPath}
+              songSlug={song.slug}
+              className="catalog-entry__duration"
+            />
+          ) : (
+            <span className="catalog-entry__duration">Coming Soon</span>
+          )}
         </div>
 
         <h3 className="font-display catalog-entry__title">

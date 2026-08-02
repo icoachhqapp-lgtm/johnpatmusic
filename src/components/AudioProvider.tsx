@@ -59,6 +59,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }, [currentSong]);
 
   const playSong = useCallback((song: Song) => {
+    if (!song.released) return;
+
     const audio = audioRef.current;
     if (!audio) return;
 

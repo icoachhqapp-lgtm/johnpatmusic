@@ -1,6 +1,7 @@
 "use client";
 
 import { useAudioPlayer } from "@/components/AudioProvider";
+import { ComingSoonNotice } from "@/components/ComingSoonNotice";
 import type { Song } from "@/data/songs";
 
 interface DemoPlayButtonProps {
@@ -15,6 +16,21 @@ export function DemoPlayButton({
   className = "",
 }: DemoPlayButtonProps) {
   const { playSong, isPlayingSong, isCurrentSong, status } = useAudioPlayer();
+
+  if (!song.released) {
+    return (
+      <ComingSoonNotice
+        compact
+        className={
+          variant === "overlay"
+            ? "coming-soon--overlay"
+            : variant === "card"
+              ? "coming-soon--card"
+              : className
+        }
+      />
+    );
+  }
 
   const playing = isPlayingSong(song.slug);
   const current = isCurrentSong(song.slug);

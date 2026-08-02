@@ -48,15 +48,16 @@ export function ContactForm({
   const [inquiryType, setInquiryType] =
     useState<InquiryType>(defaultInquiryType);
   const [songTitle, setSongTitle] = useState(initialSong);
+  const [prevInitialSong, setPrevInitialSong] = useState(initialSong);
+  if (initialSong !== prevInitialSong) {
+    setPrevInitialSong(initialSong);
+    setSongTitle(initialSong);
+  }
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
-
-  useEffect(() => {
-    setSongTitle(initialSong);
-  }, [initialSong]);
 
   useEffect(() => {
     if (status === "idle" || !statusRef.current) return;
