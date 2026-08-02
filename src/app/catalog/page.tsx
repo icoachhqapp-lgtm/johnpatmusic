@@ -4,14 +4,14 @@ import { CatalogBrowser } from "@/components/CatalogBrowser";
 export const metadata: Metadata = {
   title: "The Catalog",
   description:
-    "10 original songs written for Country, Southern Rock, and Americana artists. Concept demos available for recording inquiry.",
+    "12 original songs written for Country, Southern Rock, and Americana artists. Concept demos available for recording inquiry.",
   alternates: {
     canonical: "/catalog",
   },
   openGraph: {
     title: "The Catalog | JohnPat",
     description:
-      "10 original songs written for Country, Southern Rock, and Americana artists.",
+      "12 original songs written for Country, Southern Rock, and Americana artists.",
     url: "/catalog",
   },
 };
@@ -24,7 +24,7 @@ export default function CatalogPage() {
           <p className="eyebrow">Songwriter Portfolio</p>
           <h1 className="section-title">The Catalog</h1>
           <p className="section-copy">
-            10 original songs written for Country, Southern Rock, and Americana
+            12 original songs written for Country, Southern Rock, and Americana
             artists.
           </p>
           <p className="demo-notice">

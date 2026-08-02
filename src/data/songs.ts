@@ -223,6 +223,46 @@ export const songs: Song[] = [
     feel: "Up-tempo · neon-lit Country",
     copyright: COPYRIGHT,
   },
+  {
+    slug: "stay-till-sunrise",
+    title: "Stay Till Sunrise",
+    genres: ["Country"],
+    themes: ["love", "romance", "night"],
+    description:
+      "Placeholder description — a warm Country love song about holding onto the night a little longer.",
+    story:
+      "Placeholder story — edit with the final songwriter notes for Stay Till Sunrise.",
+    lyricExcerpt:
+      "Lyric excerpt coming soon...\nFinalized lines to be added...",
+    audioPath: "/audio/stay-till-sunrise.mp3",
+    artworkPath: "/images/songs/stay-till-sunrise.png",
+    availableForRecording: true,
+    featured: false,
+    released: false,
+    vocalFormat: "Male vocal",
+    feel: "Warm mid-tempo · intimate",
+    copyright: COPYRIGHT,
+  },
+  {
+    slug: "just-for-fun",
+    title: "Just for Fun",
+    genres: ["Country", "Southern Rock"],
+    themes: ["resilience", "defiance", "proving them wrong"],
+    description:
+      "Placeholder description — an upbeat anthem about proving the doubters wrong.",
+    story:
+      "Placeholder story — edit with the final songwriter notes for Just for Fun.",
+    lyricExcerpt:
+      "Lyric excerpt coming soon...\nFinalized lines to be added...",
+    audioPath: "/audio/just-for-fun.mp3",
+    artworkPath: "/images/songs/just-for-fun.png",
+    availableForRecording: true,
+    featured: false,
+    released: false,
+    vocalFormat: "Male vocal",
+    feel: "Upbeat · defiant swagger",
+    copyright: COPYRIGHT,
+  },
 ];
 
 export const AVAILABILITY_STATEMENT =
