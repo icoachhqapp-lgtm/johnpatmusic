@@ -33,7 +33,7 @@ export const songs: Song[] = [
     story:
       "Written for the moments when life asks more of you than you think you have. This song sits at the crossroads of Country storytelling and Southern Rock muscle—built for a strong male vocal that can carry both swagger and sincerity.",
     lyricExcerpt:
-      "You give what it takes when the road gets long…\nyou give what it takes when your back ain’t strong…",
+      "I do what it takes...\nWhatever it costs...",
     audioPath: "/audio/what-it-takes.mp3",
     artworkPath: "/images/songs/what-it-takes.png",
     availableForRecording: true,
@@ -53,7 +53,7 @@ export const songs: Song[] = [
     story:
       "Some love songs shout. This one watches. It’s about that rare glance across a room that says everything words can’t. Written for a sincere male vocal that can carry the quiet weight of that look.",
     lyricExcerpt:
-      "She only looks at me that way…\nlike I’m still the man she’d choose today…",
+      "She only looks at me that way...\nLike I'm still the man she'd choose today...",
     audioPath: "/audio/she-only-looks-at-me-that-way.mp3",
     artworkPath: "/images/songs/she-only-looks-at-me-that-way.png",
     availableForRecording: true,
@@ -73,7 +73,7 @@ export const songs: Song[] = [
     story:
       "This one came from watching a kid grow up overnight. It’s Country and Americana at heart: soft acoustic bones, honest lyric, and a chorus that parents will feel in their chest.",
     lyricExcerpt:
-      "Can I come along… just a little while longer…\nbefore the road gets wider and you’re stronger…",
+      "Can I come along...\nBefore it's too late...",
     audioPath: "/audio/can-i-come-along.mp3",
     artworkPath: "/images/songs/can-i-come-along.png",
     availableForRecording: true,
@@ -93,7 +93,7 @@ export const songs: Song[] = [
     story:
       "Written like a porch conversation at dusk. Two voices trade verses about the years that shaped them—perfect for a Male/Female duet that feels lived-in and warm.",
     lyricExcerpt:
-      "Back when time moved slow…\nand nobody was in a hurry to go…",
+      "Back when time moved slow...\nHearts were runnin' free...",
     audioPath: "/audio/back-when-time-moved-slow.mp3",
     artworkPath: "/images/songs/back-when-time-moved-slow.png",
     availableForRecording: true,
@@ -113,7 +113,7 @@ export const songs: Song[] = [
     story:
       "Built for grit. Thick guitars, bluesy edge, and a vocal that sounds like it’s been through something. This is survival music—loud enough for the stage, honest enough for the highway.",
     lyricExcerpt:
-      "I still got some fight left in me…\nain’t down yet and I don’t aim to be…",
+      "I've still got some fight...\nStill got that flame...",
     audioPath: "/audio/still-got-some-fight.mp3",
     artworkPath: "/images/songs/still-got-some-fight.png",
     availableForRecording: true,
@@ -133,7 +133,7 @@ export const songs: Song[] = [
     story:
       "Written for quiet courage. Country and Americana textures carry a lyric about faith that doesn’t shout—it steadies. Suited to a sincere male vocal with room to breathe.",
     lyricExcerpt:
-      "Believe when the night won’t break…\nbelieve in the promise you can’t yet take…",
+      "I believe...\nWhen I can't see tomorrow...",
     audioPath: "/audio/believe.mp3",
     artworkPath: "/images/songs/believe.png",
     availableForRecording: true,
@@ -153,7 +153,7 @@ export const songs: Song[] = [
     story:
       "This song belongs on a kitchen table as much as a stage. It’s about belonging—the faces, the laughter, the ones who wait up. Written as a Male/Female duet for that shared truth.",
     lyricExcerpt:
-      "Home ain’t a house… it ain’t brick and wood…\nit’s the ones who love you like nobody could…",
+      "Home is the arms...\nThat catch you when you fall...",
     audioPath: "/audio/home-aint-a-house.mp3",
     artworkPath: "/images/songs/home-aint-a-house.png",
     availableForRecording: true,
@@ -173,7 +173,7 @@ export const songs: Song[] = [
     story:
       "Written for Friday nights and last-call smiles. Upbeat Country energy with a hook that invites a crowd to sing along. Built for a male vocal that can smile through the mic.",
     lyricExcerpt:
-      "These nights ain’t long enough…\nwhen the band’s still playing and the road’s still rough…",
+      "Not long enough...\nNever is...",
     audioPath: "/audio/not-long-enough.mp3",
     artworkPath: "/images/songs/not-long-enough.png",
     availableForRecording: true,
@@ -193,7 +193,7 @@ export const songs: Song[] = [
     story:
       "The title says the mission. This is Country and Americana with purpose: a lyric about responsibility that doesn’t preach—it invites. Strong male vocal territory with a memorable title hook.",
     lyricExcerpt:
-      "Leave it better than you found it…\nleave a little light where the dark surrounded it…",
+      "You don't own this world forever...\nLeave it better than you found it...",
     audioPath: "/audio/leave-it-better-than-you-found-it.mp3",
     artworkPath: "/images/songs/leave-it-better-than-you-found-it.png",
     availableForRecording: true,
@@ -213,7 +213,7 @@ export const songs: Song[] = [
     story:
       "Built for the dance floor and the late-night crowd. Country meets Southern Rock swagger with a chorus meant to turn a room into a revival. Male vocal with attitude and joy.",
     lyricExcerpt:
-      "It’s a honky tonk revival…\nbring your broken heart and your survival…",
+      "Keep this old tradition...\nAlive tonight...",
     audioPath: "/audio/honky-tonk-revival.mp3",
     artworkPath: "/images/songs/honky-tonk-revival.png",
     availableForRecording: true,
