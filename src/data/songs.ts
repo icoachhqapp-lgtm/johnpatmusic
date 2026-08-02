@@ -51,15 +51,15 @@ export const songs: Song[] = [
     description:
       "A tender Country love song about the look that belongs to one person alone.",
     story:
-      "Some love songs shout. This one watches. It’s about that rare glance across a room that says everything words can’t. Written as a Male/Female duet so two voices can carry the conversation.",
+      "Some love songs shout. This one watches. It’s about that rare glance across a room that says everything words can’t. Written for a sincere male vocal that can carry the quiet weight of that look.",
     lyricExcerpt:
-      "She only looks at me that way…\nlike the whole world fell away…",
+      "She only looks at me that way…\nlike I’m still the man she’d choose today…",
     audioPath: "/audio/she-only-looks-at-me-that-way.mp3",
     artworkPath: "/images/songs/she-only-looks-at-me-that-way.png",
     availableForRecording: true,
     featured: false,
     released: false,
-    vocalFormat: "Male/Female duet",
+    vocalFormat: "Male vocal",
     feel: "Warm mid-tempo · intimate",
     copyright: COPYRIGHT,
   },
