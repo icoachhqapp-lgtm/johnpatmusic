@@ -1,10 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { DemoPlayButton } from "@/components/DemoPlayButton";
 import { SongArtwork } from "@/components/SongArtwork";
 import { SongCard } from "@/components/SongCard";
-import { getCatalogPreview, getFeaturedSong } from "@/data/songs";
+import { getCatalogPreview, getSongBySlug } from "@/data/songs";
+
+const HYPERFOLLOW_URL =
+  "https://distrokid.com/hyperfollow/johnpat/honky-tonk-revival?ref=release";
+const SPOTIFY_URL = "https://open.spotify.com/track/6Vx5Sum0oBeBrDN3d297oc";
+const APPLE_MUSIC_URL =
+  "https://music.apple.com/us/album/honky-tonk-revival/6793500219?i=6793500220";
+const YOUTUBE_URL = "https://youtu.be/Q43MLH8LqfQ";
+const AMAZON_MUSIC_URL =
+  "https://music.amazon.com/albums/B0H9YP81PG?trackAsin=B0H9YL83KR";
 
 export const metadata: Metadata = {
   title: {
@@ -24,8 +32,12 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featured = getFeaturedSong();
+  const featuredRelease = getSongBySlug("honky-tonk-revival");
   const preview = getCatalogPreview(6);
+
+  if (!featuredRelease) {
+    throw new Error("Honky Tonk Revival song data is missing.");
+  }
 
   return (
     <main>
@@ -52,66 +64,102 @@ export default function HomePage() {
         <div className="film-grain" aria-hidden="true" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-6 pb-24 pt-10 lg:px-10">
-          <div className="max-w-3xl">
-            <p className="font-display text-3xl tracking-[0.12em] text-[var(--paper)] sm:text-4xl">
-              JOHNPAT
-            </p>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--amber)] sm:text-sm">
-              Country · Southern Rock · Americana Songwriter
-            </p>
+          <div className="release-hero">
+            <SongArtwork
+              src={featuredRelease.artworkPath}
+              alt="Official Honky Tonk Revival single artwork by JohnPat"
+              size="featured"
+              priority
+              className="release-hero__art"
+            />
 
-            <h1 className="font-display mt-8 max-w-3xl text-[2.6rem] leading-[1.08] text-[var(--paper)] sm:text-6xl lg:text-[4.5rem]">
-              ORIGINAL SONGS
-              <span className="mt-2 block text-[var(--amber-bright)]">
-                LOOKING FOR THE RIGHT VOICE
-              </span>
-            </h1>
+            <div className="release-hero__content">
+              <p className="eyebrow">Debut Single Out Now</p>
+              <h1 className="font-display release-hero__title">
+                HONKY TONK REVIVAL
+              </h1>
+              <p className="release-hero__subtitle">
+                A high-energy blend of country, blues, and Southern rock built
+                around honest storytelling.
+              </p>
 
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#ddd2c2] sm:text-xl">
-              Stories of faith, family, hard work, heartbreak, good times, and
-              the legacy we leave behind—written for artists who want something
-              real to sing.
-            </p>
+              <div className="release-hero__actions">
+                <a
+                  href={HYPERFOLLOW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-primary release-hero__primary"
+                >
+                  🎵 Listen Everywhere
+                </a>
+                <div className="release-hero__platforms">
+                  <a
+                    href={SPOTIFY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button-secondary release-platform-button"
+                  >
+                    🟢 Spotify
+                  </a>
+                  <a
+                    href={APPLE_MUSIC_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button-secondary release-platform-button"
+                  >
+                    🍎 Apple Music
+                  </a>
+                  <a
+                    href={YOUTUBE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button-secondary release-platform-button"
+                  >
+                    ▶️ YouTube
+                  </a>
+                  <a
+                    href={AMAZON_MUSIC_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="button-secondary release-platform-button"
+                  >
+                    🎧 Amazon Music
+                  </a>
+                </div>
+              </div>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link href="/catalog" className="button-primary">
-                Explore the Catalog
-              </Link>
-              <Link href="/for-artists" className="button-secondary">
-                For Artists
-              </Link>
+              <p className="demo-notice">
+                JohnPat&apos;s debut single brings the songwriter identity of
+                the catalog to a fully released track while the next chapter is
+                already taking shape.
+              </p>
             </div>
-
-            <p className="demo-notice">
-              Original lyrics written by JohnPat. Concept recordings created to
-              demonstrate the songs’ emotion, structure, and musical direction.
-            </p>
           </div>
         </div>
 
         <a
           href="#featured"
-          aria-label="Scroll to featured song"
+          aria-label="Scroll to featured release"
           className="scroll-indicator absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.32em] text-white/60"
         >
-          Featured Song
+          Featured Release
           <span className="scroll-indicator__line" />
         </a>
       </section>
 
-      {/* FEATURED SONG */}
+      {/* FEATURED RELEASE */}
       <section
         id="featured"
         className="page-section border-t border-white/5 bg-[var(--ink-soft)]"
       >
         <div className="section-shell reveal">
-          <p className="eyebrow">Featured Song</p>
-          <h2 className="section-title">What It Takes</h2>
+          <p className="eyebrow">Featured Release</p>
+          <h2 className="section-title">Honky Tonk Revival</h2>
 
           <div className="featured-song mt-10">
             <SongArtwork
-              src={featured.artworkPath}
-              alt={`Artwork for ${featured.title}`}
+              src={featuredRelease.artworkPath}
+              alt="Honky Tonk Revival single cover artwork by JohnPat"
               size="featured"
               priority
               className="featured-song__art"
@@ -119,7 +167,7 @@ export default function HomePage() {
 
             <div>
               <div className="song-card__tags">
-                {featured.genres.map((genre) => (
+                {featuredRelease.genres.map((genre) => (
                   <span key={genre} className="tag tag--genre">
                     {genre}
                   </span>
@@ -127,40 +175,67 @@ export default function HomePage() {
               </div>
 
               <h3 className="font-display mt-4 text-3xl text-[var(--paper)] sm:text-4xl">
-                {featured.title}
+                {featuredRelease.title}
               </h3>
 
-              <div className="song-card__tags mt-4">
-                {featured.themes.slice(0, 4).map((theme) => (
-                  <span key={theme} className="tag tag--theme">
-                    {theme}
-                  </span>
-                ))}
-              </div>
-
               <p className="mt-5 text-lg leading-8 text-[var(--dust)]">
-                {featured.description}
+                JohnPat&apos;s debut single blends country, Southern rock, and
+                Americana into a high-energy honky-tonk anthem built for the
+                dance floor.
               </p>
 
-              <p className="mt-3 text-sm uppercase tracking-[0.16em] text-[#9d9080]">
-                {featured.vocalFormat} · {featured.feel}
+              <p className="mt-4 text-lg leading-8 text-[#ddd2c2]">
+                This first official release puts JohnPat&apos;s songwriting front
+                and center in a hard-driving single made for boots, barrooms,
+                and loud late nights.
               </p>
 
               <div className="featured-song__actions">
-                <DemoPlayButton song={featured} variant="primary" />
-                <Link
-                  href={`/songs/${featured.slug}`}
-                  className="button-secondary"
-                >
-                  The Story
-                </Link>
-                <Link
-                  href={`/contact?song=${featured.slug}`}
+                <a
+                  href={HYPERFOLLOW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="button-primary"
                 >
-                  Recording Inquiry
-                </Link>
+                  🎵 Listen Everywhere
+                </a>
+                <a
+                  href={SPOTIFY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary release-platform-button"
+                >
+                  🟢 Spotify
+                </a>
+                <a
+                  href={APPLE_MUSIC_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary release-platform-button"
+                >
+                  🍎 Apple Music
+                </a>
+                <a
+                  href={YOUTUBE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary release-platform-button"
+                >
+                  ▶️ YouTube
+                </a>
+                <a
+                  href={AMAZON_MUSIC_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary release-platform-button"
+                >
+                  🎧 Amazon Music
+                </a>
               </div>
+
+              <p className="release-coming-soon">
+                Next release coming soon.
+              </p>
             </div>
           </div>
         </div>
@@ -266,3 +341,4 @@ export default function HomePage() {
     </main>
   );
 }
+
