@@ -7,7 +7,8 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { getSongBySlug, songs } from "@/data/songs";
+import { getSongBySlug } from "@/data/songs";
+import { getAlbumTracks } from "@/data/album";
 
 const INQUIRY_TYPES = [
   "Recording Inquiry",
@@ -35,7 +36,10 @@ export function ContactForm({
   defaultInquiryType = "Recording Inquiry",
 }: ContactFormProps) {
   const initialSong = initialSongSlug
-    ? (getSongBySlug(initialSongSlug)?.title ?? "")
+    ? (getSongBySlug(initialSongSlug)?.title ??
+        getAlbumTracks().find((track) => track.slug === initialSongSlug)
+          ?.title ??
+        "")
     : "";
 
   const formId = useId();
@@ -259,9 +263,9 @@ export function ContactForm({
             onChange={(event) => setSongTitle(event.target.value)}
           >
             <option value="">Select a song (optional)</option>
-            {songs.map((song) => (
-              <option key={song.slug} value={song.title}>
-                {song.title}
+            {getAlbumTracks().map((track) => (
+              <option key={track.slug} value={track.title}>
+                {track.title}
               </option>
             ))}
           </select>

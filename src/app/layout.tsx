@@ -61,10 +61,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/songs/what-it-takes.png",
+        url: "/images/albums/what-it-takes.png",
         width: 1200,
         height: 1200,
-        alt: "JohnPat — What It Takes song artwork",
+        alt: "JohnPat — What It Takes album artwork",
       },
     ],
   },
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "JohnPat | Country · Southern Rock · Americana Songwriter",
     description: SITE_DESCRIPTION,
-    images: ["/images/songs/what-it-takes.png"],
+    images: ["/images/albums/what-it-takes.png"],
   },
   icons: {
     icon: [{ url: "/icon.png", type: "image/png" }],

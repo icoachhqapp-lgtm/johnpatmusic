@@ -1,16 +1,16 @@
-# Concept demo audio files for the JohnPat songwriter catalog.
+# Audio assets for the JohnPat website
 #
-# Preferred playback format: MP3
-# what-it-takes.mp3
-# she-only-looks-at-me-that-way.mp3
-# can-i-come-along.mp3
-# back-when-time-moved-slow.mp3
-# still-got-some-fight.mp3
-# believe.mp3
-# home-aint-a-house.mp3
-# not-long-enough.mp3
-# leave-it-better-than-you-found-it.mp3
-# honky-tonk-revival.mp3
+# ALBUM CATALOG PREVIEWS (required for /catalog playback):
+#   public/audio/previews/NN-slug.mp3
+#   See public/audio/previews/README.md for the full filename list.
+#   These must be separate ~30-second MP3 clips.
+#   Do NOT point the album player at full-length masters.
 #
-# WAV masters may also be kept here for archive.
-# The player shows "Demo coming soon" if a referenced file is missing.
+# FULL MASTERS:
+#   Do not expose or link full-length WAV files in the catalog, HTML, or JS.
+#   WAV masters under this folder are gitignored and must not be referenced
+#   by the public album player.
+#
+# Legacy songwriter concept demos (song detail pages) may still reference
+# MP3 paths under /audio/{slug}.mp3 when a track is marked released.
+# Album catalog playback never uses those full files — only /audio/previews/.

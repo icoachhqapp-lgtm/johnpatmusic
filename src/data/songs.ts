@@ -22,10 +22,14 @@ export interface Song {
 
 const COPYRIGHT = "© 2026 JohnPat Music. All rights reserved.";
 
+/**
+ * Public songwriter detail entries that belong on WHAT IT TAKES.
+ * The Music/Catalog page is driven by `src/data/album.ts` — not this list order.
+ */
 export const songs: Song[] = [
   {
-    slug: "what-it-takes",
-    title: "What It Takes",
+    slug: "whatever-it-takes",
+    title: "Whatever It Takes",
     genres: ["Country", "Southern Rock"],
     themes: ["hard work", "resilience", "responsibility", "faith"],
     description:
@@ -35,7 +39,7 @@ export const songs: Song[] = [
     lyricExcerpt:
       "I do what it takes...\nWhatever it costs...",
     audioPath: "/audio/what-it-takes.mp3",
-    artworkPath: "/images/songs/what-it-takes.png",
+    artworkPath: "/images/songs/whatever-it-takes.png",
     availableForRecording: true,
     featured: true,
     released: false,
@@ -45,7 +49,7 @@ export const songs: Song[] = [
   },
   {
     slug: "she-only-looks-at-me-that-way",
-    title: "She Only Looks at Me That Way",
+    title: "She Only Looks At Me That Way",
     genres: ["Country"],
     themes: ["love", "devotion", "relationship"],
     description:
@@ -61,26 +65,6 @@ export const songs: Song[] = [
     released: false,
     vocalFormat: "Male vocal",
     feel: "Warm mid-tempo · intimate",
-    copyright: COPYRIGHT,
-  },
-  {
-    slug: "can-i-come-along",
-    title: "Can I Come Along",
-    genres: ["Country", "Americana"],
-    themes: ["fatherhood", "family", "growing up"],
-    description:
-      "A father-and-child story about time moving too fast—and wanting one more mile together.",
-    story:
-      "This one came from watching a kid grow up overnight. It’s Country and Americana at heart: soft acoustic bones, honest lyric, and a chorus that parents will feel in their chest.",
-    lyricExcerpt:
-      "Can I come along...\nBefore it's too late...",
-    audioPath: "/audio/can-i-come-along.mp3",
-    artworkPath: "/images/songs/can-i-come-along.png",
-    availableForRecording: true,
-    featured: false,
-    released: false,
-    vocalFormat: "Male vocal",
-    feel: "Ballad · reflective",
     copyright: COPYRIGHT,
   },
   {
@@ -121,6 +105,93 @@ export const songs: Song[] = [
     released: false,
     vocalFormat: "Male vocal",
     feel: "Up-tempo · Southern Rock edge",
+    copyright: COPYRIGHT,
+  },
+  {
+    slug: "leave-it-better-than-you-found-it",
+    title: "Leave It Better Than You Found It",
+    genres: ["Country", "Americana"],
+    themes: ["legacy", "character", "responsibility"],
+    description:
+      "A song about character and legacy—leaving people and places better than you found them.",
+    story:
+      "The title says the mission. This is Country and Americana with purpose: a lyric about responsibility that doesn’t preach—it invites. Strong male vocal territory with a memorable title hook.",
+    lyricExcerpt:
+      "You don't own this world forever...\nLeave it better than you found it...",
+    audioPath: "/audio/leave-it-better-than-you-found-it.mp3",
+    artworkPath: "/images/songs/leave-it-better-than-you-found-it.png",
+    availableForRecording: true,
+    featured: false,
+    released: false,
+    vocalFormat: "Male vocal",
+    feel: "Steady mid-tempo · anthemic",
+    copyright: COPYRIGHT,
+  },
+  {
+    slug: "honky-tonk-revival",
+    title: "Honky Tonk Revival",
+    genres: ["Country", "Southern Rock"],
+    themes: ["dancing", "nightlife", "celebration", "country tradition"],
+    description:
+      "A celebration of the honky-tonk spirit—neon glow, wood floors, and Country tradition alive again.",
+    story:
+      "Built for the dance floor and the late-night crowd. Country meets Southern Rock swagger with a chorus meant to turn a room into a revival. Male vocal with attitude and joy.",
+    lyricExcerpt:
+      "Keep this old tradition...\nAlive tonight...",
+    audioPath: "/audio/honky-tonk-revival.mp3",
+    artworkPath: "/images/songs/honky-tonk-revival.png",
+    availableForRecording: true,
+    featured: false,
+    released: true,
+    vocalFormat: "Male vocal",
+    feel: "Up-tempo · neon-lit Country",
+    copyright: COPYRIGHT,
+  },
+  {
+    slug: "stay-till-sunrise",
+    title: "Stay Till Sunrise",
+    genres: ["Country"],
+    themes: ["love", "romance", "night"],
+    description:
+      "A warm Country love song about holding onto the night a little longer.",
+    story:
+      "Written for quiet hours and last-call light—intimate Country storytelling for a sincere male vocal.",
+    lyricExcerpt:
+      "Stay till sunrise...\nDon't let this night slip by...",
+    audioPath: "/audio/stay-till-sunrise.mp3",
+    artworkPath: "/images/songs/stay-till-sunrise.png",
+    availableForRecording: true,
+    featured: false,
+    released: false,
+    vocalFormat: "Male vocal",
+    feel: "Warm mid-tempo · intimate",
+    copyright: COPYRIGHT,
+  },
+];
+
+/**
+ * Songs held for a future album / catalog expansion.
+ * Not listed on /catalog, homepage, contact dropdown, or sitemap.
+ */
+export const archivedSongs: Song[] = [
+  {
+    slug: "can-i-come-along",
+    title: "Can I Come Along",
+    genres: ["Country", "Americana"],
+    themes: ["fatherhood", "family", "growing up"],
+    description:
+      "A father-and-child story about time moving too fast—and wanting one more mile together.",
+    story:
+      "This one came from watching a kid grow up overnight. It’s Country and Americana at heart: soft acoustic bones, honest lyric, and a chorus that parents will feel in their chest.",
+    lyricExcerpt:
+      "Can I come along...\nBefore it's too late...",
+    audioPath: "/audio/can-i-come-along.mp3",
+    artworkPath: "/images/songs/can-i-come-along.png",
+    availableForRecording: true,
+    featured: false,
+    released: false,
+    vocalFormat: "Male vocal",
+    feel: "Ballad · reflective",
     copyright: COPYRIGHT,
   },
   {
@@ -184,76 +255,16 @@ export const songs: Song[] = [
     copyright: COPYRIGHT,
   },
   {
-    slug: "leave-it-better-than-you-found-it",
-    title: "Leave It Better Than You Found It",
-    genres: ["Country", "Americana"],
-    themes: ["legacy", "character", "responsibility"],
-    description:
-      "A song about character and legacy—leaving people and places better than you found them.",
-    story:
-      "The title says the mission. This is Country and Americana with purpose: a lyric about responsibility that doesn’t preach—it invites. Strong male vocal territory with a memorable title hook.",
-    lyricExcerpt:
-      "You don't own this world forever...\nLeave it better than you found it...",
-    audioPath: "/audio/leave-it-better-than-you-found-it.mp3",
-    artworkPath: "/images/songs/leave-it-better-than-you-found-it.png",
-    availableForRecording: true,
-    featured: false,
-    released: false,
-    vocalFormat: "Male vocal",
-    feel: "Steady mid-tempo · anthemic",
-    copyright: COPYRIGHT,
-  },
-  {
-    slug: "honky-tonk-revival",
-    title: "Honky Tonk Revival",
-    genres: ["Country", "Southern Rock"],
-    themes: ["dancing", "nightlife", "celebration", "country tradition"],
-    description:
-      "A celebration of the honky-tonk spirit—neon glow, wood floors, and Country tradition alive again.",
-    story:
-      "Built for the dance floor and the late-night crowd. Country meets Southern Rock swagger with a chorus meant to turn a room into a revival. Male vocal with attitude and joy.",
-    lyricExcerpt:
-      "Keep this old tradition...\nAlive tonight...",
-    audioPath: "/audio/honky-tonk-revival.mp3",
-    artworkPath: "/images/songs/honky-tonk-revival.png",
-    availableForRecording: true,
-    featured: false,
-    released: true,
-    vocalFormat: "Male vocal",
-    feel: "Up-tempo · neon-lit Country",
-    copyright: COPYRIGHT,
-  },
-  {
-    slug: "stay-till-sunrise",
-    title: "Stay Till Sunrise",
-    genres: ["Country"],
-    themes: ["love", "romance", "night"],
-    description:
-      "Placeholder description — a warm Country love song about holding onto the night a little longer.",
-    story:
-      "Placeholder story — edit with the final songwriter notes for Stay Till Sunrise.",
-    lyricExcerpt:
-      "Lyric excerpt coming soon...\nFinalized lines to be added...",
-    audioPath: "/audio/stay-till-sunrise.mp3",
-    artworkPath: "/images/songs/stay-till-sunrise.png",
-    availableForRecording: true,
-    featured: false,
-    released: false,
-    vocalFormat: "Male vocal",
-    feel: "Warm mid-tempo · intimate",
-    copyright: COPYRIGHT,
-  },
-  {
     slug: "just-for-fun",
     title: "Just for Fun",
     genres: ["Country", "Southern Rock"],
     themes: ["resilience", "defiance", "proving them wrong"],
     description:
-      "Placeholder description — an upbeat anthem about proving the doubters wrong.",
+      "An upbeat anthem about proving the doubters wrong.",
     story:
-      "Placeholder story — edit with the final songwriter notes for Just for Fun.",
+      "Built for swagger and persistence—Country/Southern Rock energy for a male vocal that won’t quit.",
     lyricExcerpt:
-      "Lyric excerpt coming soon...\nFinalized lines to be added...",
+      "Every time they count me out...\nI prove 'em wrong... just for fun...",
     audioPath: "/audio/just-for-fun.mp3",
     artworkPath: "/images/songs/just-for-fun.png",
     availableForRecording: true,
